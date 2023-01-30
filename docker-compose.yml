@@ -16,7 +16,8 @@ services:
 
   php-fpm:
     build:
-      context: docker/php-fpm
+      context: docker
+      dockerfile: php-fpm/Dockerfile
       target: production
     environment:
       PHP_IDE_CONFIG: serverName=${DOMAIN_NAME}
@@ -25,7 +26,8 @@ services:
 
   php-cli:
     build:
-      context: docker/php-cli
+      context: docker
+      dockerfile: php-cli/Dockerfile
       target: production
     volumes:
       - ./app:/app

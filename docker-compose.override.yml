@@ -4,5 +4,6 @@ services:
       target: development
 
   php-cli:
+    build:
       target: development
 
