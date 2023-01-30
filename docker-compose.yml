@@ -3,8 +3,7 @@ version: "3.7"
 services:
   nginx:
     build:
-      context: docker/development
-      dockerfile: nginx/Dockerfile
+      context: docker/nginx
     environment:
       SERVER_NAME: ${DOMAIN_NAME}
     ports:
@@ -17,8 +16,8 @@ services:
 
   php-fpm:
     build:
-      context: docker/development
-      dockerfile: php-fpm/Dockerfile
+      context: docker/php-fpm
+      target: production
     environment:
       PHP_IDE_CONFIG: serverName=${DOMAIN_NAME}
     volumes:
@@ -26,13 +25,13 @@ services:
 
   php-cli:
     build:
-      context: docker/development
-      dockerfile: php-cli/Dockerfile
+      context: docker/php-cli
+      target: production
     volumes:
       - ./app:/app
 
   mysql:
-    image: mysql:8
+    image: mariadb:10.9
     environment:
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_USER: ${DATABASE_USER}
